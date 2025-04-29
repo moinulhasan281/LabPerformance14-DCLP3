@@ -40,6 +40,29 @@ The sum of the first two numbers equals the target (like 5 + 2 = 7).
 
 The remaining numbers are randomly chosen.
 
+
+code:
+
+import random
+
+def generate_list(target, length):
+    if length < 2:
+        raise ValueError("Length must be at least 2")
+
+    pairs = [(a, target - a) for a in range(10) if 0 <= target - a <= 9]
+    if not pairs:
+        raise ValueError(f"No digits found that sum to {target}")
+
+    first, second = random.choice(pairs)
+    remaining = [random.randint(0, 9) for _ in range(length - 2)]
+
+    return [first, second] + remaining
+
+print("Case#1 Output:", *generate_list(7, 3))
+print("Case#2 Output:", *generate_list(10, 3))
+
+
+
 📚 How It Works (Under the Hood)
 The main function here is:
 
